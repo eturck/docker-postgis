@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER Helmi Ibrahim <helmi@tuxuri.com>
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+# RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 RUN apt-get -y update
 RUN apt-get -y install wget
 RUN wget --quiet --no-check-certificate -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -11,6 +11,7 @@ RUN apt-get -y upgrade
 RUN locale-gen --no-purge en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
+RUN apt-get -y install libgdal1h
 RUN apt-get -y install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-postgis-2.1 postgis
 RUN echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/9.3/main/pg_hba.conf
 RUN service postgresql start && /bin/su postgres -c "createuser -d -s -r -l docker" && /bin/su postgres -c "psql postgres -c \"ALTER USER docker WITH ENCRYPTED PASSWORD 'docker'\"" && service postgresql stop
