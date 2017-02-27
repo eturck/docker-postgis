@@ -2,6 +2,11 @@ FROM ubuntu:15.10
 MAINTAINER Helmi Ibrahim <helmi@tuxuri.com>
 
 # RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
+
+ENV HTTP_PROXY http://srv-pxy00.tisseo-exp.dom:8080
+ENV http_proxy http://srv-pxy00.tisseo-exp.dom:8080
+ENV HTTPS_PROXY http://srv-pxy00.tisseo-exp.dom:8080
+ENV https_proxy http://srv-pxy00.tisseo-exp.dom:8080
 RUN apt-get -y update
 RUN locale-gen --no-purge en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
